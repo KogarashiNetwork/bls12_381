@@ -1,5 +1,5 @@
 # Bls12 381 Curve 
-[![CI](https://github.com/KogarashiNetwork/bls12_381/actions/workflows/ci.yml/badge.svg)](https://github.com/KogarashiNetwork/bls12_381/actions/workflows/ci.yml) [![crates.io badge](https://img.shields.io/crates/v/zero-bls12-381.svg)](https://crates.io/crates/zero-bls12-381) [![GitHub license](https://img.shields.io/badge/license-GPL3%2FApache2-blue)](#LICENSE) [![dependency status](https://deps.rs/crate/zero-bls12-381/0.1.11/status.svg)](https://deps.rs/crate/zero-bls12-381/0.1.11)
+[![CI](https://github.com/KogarashiNetwork/bls12_381/actions/workflows/ci.yml/badge.svg)](https://github.com/KogarashiNetwork/bls12_381/actions/workflows/ci.yml) [![crates.io badge](https://img.shields.io/crates/v/zero-bls12-381.svg)](https://crates.io/crates/zero-bls12-381) [![GitHub license](https://img.shields.io/badge/license-GPL3%2FApache2-blue)](#LICENSE) [![codecov](https://codecov.io/gh/KogarashiNetwork/bls12_381/branch/master/graph/badge.svg?token=W83P6U2QKE)](https://codecov.io/gh/KogarashiNetwork/bls12_381) [![dependency status](https://deps.rs/crate/zero-bls12-381/0.1.11/status.svg)](https://deps.rs/crate/zero-bls12-381/0.1.11)
 
 Pairing friendly bls12-381 curve.
 
