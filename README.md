@@ -1,4 +1,6 @@
-# Bls12 381 Curve [![crates.io badge](https://img.shields.io/crates/v/zero-bls12-381.svg)](https://crates.io/crates/zero-bls12-381)
+# Bls12 381 Curve 
+[![CI](https://github.com/KogarashiNetwork/bls12_381/actions/workflows/ci.yml/badge.svg)](https://github.com/KogarashiNetwork/bls12_381/actions/workflows/ci.yml) [![crates.io badge](https://img.shields.io/crates/v/zero-bls12-381.svg)](https://crates.io/crates/zero-bls12-381) [![GitHub license](https://img.shields.io/badge/license-GPL3%2FApache2-blue)](#LICENSE) [![dependency status](https://deps.rs/crate/zero-bls12-381/0.1.11/status.svg)](https://deps.rs/crate/zero-bls12-381/0.1.11)
+
 Pairing friendly bls12-381 curve.
 
 **This crate partly uses [https://github.com/dusk-network/bls12_381](https://github.com/dusk-network/bls12_381) and [https://github.com/dusk-network/bls12_381](https://github.com/dusk-network/bls12_381) implementation designed by Dusk-Network team and, @str4d and @ebfull.**
