@@ -3,24 +3,20 @@ authors = [
     'ashWhiteHat<phantomofrotten@gmail.com>',
     'KiriosK<KiriosK@yandex.ru>'
 ]
-name = "zero-bls12-381"
-description = 'bls curve implementation'
-version = "0.1.11"
+name = "bls-12-381"
+description = 'lifted elgamal encryption implementation'
+version = "0.0.10"
 edition = "2021"
 license = "Apache-2.0"
-homepage = 'https://github.com/KogarashiNetwork/Kogarashi'
-repository = 'https://github.com/KogarashiNetwork/bls12_381'
+homepage = 'https://github.com/KogarashiNetwork/Kogarashi/'
+repository = 'https://github.com/KogarashiNetwork/Kogarashi/'
 readme = 'README.md'
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
-
 [dependencies]
+zkstd = { version = "0.0.10", default-features = false }
 serde = { version = "1.0.102", default-features = false, features = ["derive"] }
-zero-crypto = { version= "0.1.11", default-features = false }
 rand_core = { version="0.6.4", default-features = false }
-parity-scale-codec = { version = "2", default-features = false, features = ["derive"] }
-dusk-bytes = { version = "0.1" }
-subtle = { version = "2.0", default-features = false }
+parity-scale-codec = { version = "2.0.0", default-features = false, features = ["derive"] }
 
 [dev-dependencies]
 paste = "1.0.11"
