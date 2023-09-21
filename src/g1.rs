@@ -26,6 +26,8 @@ const B: Fq = Fq([
     0x9d645513d83de7e,
 ]);
 
+const B3: Fq = B.add_const(B).add_const(B);
+
 /// The projective form of coordinate
 #[derive(Debug, Clone, Copy, Decode, Encode)]
 pub struct G1Affine {
@@ -186,7 +188,7 @@ impl Add for G1Affine {
     type Output = G1Projective;
 
     fn add(self, rhs: G1Affine) -> Self::Output {
-        add_point(self.to_extended(), rhs.to_extended())
+        add_affine_point(self, rhs)
     }
 }
 
@@ -206,7 +208,7 @@ impl Sub for G1Affine {
     type Output = G1Projective;
 
     fn sub(self, rhs: G1Affine) -> Self::Output {
-        add_point(self.to_extended(), rhs.neg().to_extended())
+        add_affine_point(self, rhs.neg())
     }
 }
 
@@ -271,7 +273,7 @@ impl Add for G1Projective {
     type Output = Self;
 
     fn add(self, rhs: G1Projective) -> Self {
-        add_point(self, rhs)
+        add_projective_point(self, rhs)
     }
 }
 
@@ -291,7 +293,7 @@ impl Sub for G1Projective {
     type Output = Self;
 
     fn sub(self, rhs: G1Projective) -> Self {
-        add_point(self, -rhs)
+        add_projective_point(self, -rhs)
     }
 }
 
@@ -328,6 +330,7 @@ weierstrass_curve_operation!(
     Fq,
     G1_PARAM_A,
     G1_PARAM_B,
+    B3,
     G1Affine,
     G1Projective,
     G1_GENERATOR_X,

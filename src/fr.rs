@@ -5,6 +5,8 @@ use zkstd::arithmetic::bits_256::*;
 use zkstd::common::*;
 use zkstd::dress::field::*;
 
+use crate::error::Error;
+
 const MODULUS: [u64; 4] = [
     0xffffffff00000001,
     0x53bda402fffe5bfe,
@@ -102,6 +104,50 @@ impl Fr {
         Self(to_mont_form(val, R2, MODULUS, INV))
     }
 
+    pub const fn inner(&self) -> [u64; 4] {
+        self.0
+    }
+
+    pub fn from_hex(hex: &str) -> Result<Fr, Error> {
+        let max_len = 64;
+        let hex = hex.strip_prefix("0x").unwrap_or(hex);
+        let length = hex.len();
+        if length > max_len {
+            return Err(Error::HexStringTooLong);
+        }
+        let hex_bytes = hex.as_bytes();
+
+        let mut hex: [[u8; 16]; 4] = [[0; 16]; 4];
+        for i in 0..max_len {
+            hex[i / 16][i % 16] = if i >= length {
+                0
+            } else {
+                match hex_bytes[length - i - 1] {
+                    48..=57 => hex_bytes[length - i - 1] - 48,
+                    65..=70 => hex_bytes[length - i - 1] - 55,
+                    97..=102 => hex_bytes[length - i - 1] - 87,
+                    _ => return Err(Error::HexStringInvalid),
+                }
+            };
+        }
+        let mut limbs: [u64; 4] = [0; 4];
+        for i in 0..hex.len() {
+            limbs[i] = Fr::bytes_to_u64(&hex[i]).unwrap();
+        }
+        Ok(Fr(mul(limbs, R2, MODULUS, INV)))
+    }
+
+    fn bytes_to_u64(bytes: &[u8; 16]) -> Result<u64, Error> {
+        let mut res: u64 = 0;
+        for (i, byte) in bytes.iter().enumerate() {
+            res += match byte {
+                0..=15 => 16u64.pow(i as u32) * (*byte as u64),
+                _ => return Err(Error::BytesInvalid),
+            }
+        }
+        Ok(res)
+    }
+
     pub(crate) const fn montgomery_reduce(self) -> [u64; 4] {
         mont(
             [self.0[0], self.0[1], self.0[2], self.0[3], 0, 0, 0, 0],
@@ -129,31 +175,6 @@ impl Fr {
     pub fn is_odd(self) -> bool {
         let raw = self.montgomery_reduce();
         (raw[0] % 2) != 0
-    }
-
-    pub fn divn(&mut self, mut n: u32) {
-        if n >= 256 {
-            *self = Self::from(0_u64);
-            return;
-        }
-
-        while n >= 64 {
-            let mut t = 0;
-            for i in self.0.iter_mut().rev() {
-                core::mem::swap(&mut t, i);
-            }
-            n -= 64;
-        }
-
-        if n > 0 {
-            let mut t = 0;
-            for i in self.0.iter_mut().rev() {
-                let t2 = *i << (64 - n);
-                *i >>= n;
-                *i |= t;
-                t = t2;
-            }
-        }
     }
 
     pub fn pow_vartime(&self, by: &[u64; 4]) -> Self {
