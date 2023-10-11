@@ -43,7 +43,7 @@ checksum = "b4682ae6287fcf752ecaabbfcc7b6f9b72aa33933dc23a554d853aea8eea8635"
 
 [[package]]
 name = "bls-12-381"
-version = "0.0.12"
+version = "0.0.22"
 dependencies = [
  "parity-scale-codec",
  "paste",
@@ -554,9 +554,9 @@ dependencies = [
 
 [[package]]
 name = "zkstd"
-version = "0.0.13"
+version = "0.0.21"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "bbd4342c4836fe3a4d24ad59cc483f25538a42705102ad3a088bcd3f148d4357"
+checksum = "fd78c4ea7040b71938c21e79414d438e9d5c472cac0ba781dea317ca3fe481e0"
 dependencies = [
  "parity-scale-codec",
  "paste",
