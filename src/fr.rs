@@ -3,7 +3,7 @@ use core::iter::{Product, Sum};
 use serde::{Deserialize, Serialize};
 use zkstd::arithmetic::bits_256::*;
 use zkstd::common::*;
-use zkstd::dress::field::*;
+use zkstd::macros::field::*;
 
 use crate::error::Error;
 
@@ -22,7 +22,12 @@ const GENERATOR: [u64; 4] = [
 ];
 
 /// generator of the scalar field
-pub const MULTIPLICATIVE_GENERATOR: Fr = Fr([7, 0, 0, 0]);
+pub const MULTIPLICATIVE_GENERATOR: Fr = Fr([
+    0x0000000efffffff1,
+    0x17e363d300189c0f,
+    0xff9c57876f8457b0,
+    0x351332208fc5a8c4,
+]);
 
 /// R = 2^256 mod r
 const R: [u64; 4] = [
